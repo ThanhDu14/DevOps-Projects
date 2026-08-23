@@ -115,18 +115,20 @@ environment {
     //     }
     // }
 
-stage(" Deploy ") {
-       steps {
-         script {
-            echo '<--------------- Helm Deploy Started --------------->'
-            dir('DevOps-Project-06') {
-                sh 'helm install sample-app sample-app-1.0.1'
+        stage("Deploy to EKS") {
+            steps {
+                script {
+                    echo '<--------------- Helm Deploy Started --------------->'
+                    dir('DevOps-Project-06') {
+                        sh "helm upgrade --install sample-app ./sample-app \\
+                            --set image.repository=${registry}/devops-local/sample_app \\
+                            --set image.tag=${version}"
+                    }
+                    echo '<--------------- Helm Deploy Ends --------------->'
+                }
             }
-            echo '<--------------- Helm deploy Ends --------------->'
-         }
-       }
-}  
-}
+        }  
+    }
 }
 
 
