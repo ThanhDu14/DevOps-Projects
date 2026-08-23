@@ -120,7 +120,7 @@ environment {
                 script {
                     echo '<--------------- Helm Deploy Started --------------->'
                     dir('DevOps-Project-06') {
-                        sh "helm upgrade --install sample-app ./sample-app --set image.repository=${registry}/devops-local/sample_app --set image.tag=${version}"
+                        sh "helm upgrade --install sample-app ./sample-app --set image.repository=thanhdu.jfrog.io/devops-local/sample_app --set image.tag=${version}"
                     }
                     echo '<--------------- Helm Deploy Ends --------------->'
                 }
